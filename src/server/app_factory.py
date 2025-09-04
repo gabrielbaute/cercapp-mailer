@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 from flask import Flask
 
@@ -6,6 +7,7 @@ from src.server.routes import register_blueprints
 from src.database import db, init_db
 from src.server.server_extensions import init_login_manager, init_migrate, init_csrf
 from src.utils import Banner
+from src.cercapplogger import LoggerConfig
 
 def create_app() -> Flask:
     """Factory para crear la aplicación Flask"""

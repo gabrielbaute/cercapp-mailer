@@ -1,6 +1,7 @@
 from flask import Flask, render_template_string
 from flask_mail import Mail, Message
 from typing import Optional, Dict, Any
+from colorama import Fore, Style
 import logging
 import re
 
@@ -16,7 +17,7 @@ class Mailer:
         self.mail = Mail(app)
         self.module_name = "CercappMailer"
         self.logger = logging.getLogger(f"[{self.module_name}]")
-        self.logger.info(f"{self.module_name} inicializado.")
+        self.logger.info(f"{Fore.GREEN}{self.module_name} inicializado.")
 
     def build_subject(self, user_name: str, subject_text: str) -> str:
         """
@@ -56,7 +57,7 @@ class Mailer:
             Contenido HTML renderizado o None si hay error
         """
         try:
-            self.logger.info(f"Cargando plantilla {template_name} con contexto: {context}")
+            self.logger.debug(f"Cargando plantilla {template_name} con contexto: {context}")
             
             # Asegurar que tenemos contexto de aplicación
             with self.app.app_context():
@@ -87,10 +88,10 @@ class Mailer:
                 html_content = self.load_template(template_name, **template_vars)
                 
                 if not html_content:
-                    self.logger.error(f"No se pudo generar el contenido para {to_email}")
+                    self.logger.error(f"{Fore.RED}No se pudo generar el contenido para {to_email}")
                     return False
                     
-                self.logger.info(f"Enviando email a {to_email}")
+                self.logger.info(f"{Fore.LIGHTGREEN_EX}Enviando email a {to_email}")
                 
                 msg = Message(
                     subject=self.build_subject(
@@ -103,8 +104,8 @@ class Mailer:
                 )
                 self.mail.send(msg)
                 
-            self.logger.info(f"Email enviado exitosamente a {to_email}")
+            self.logger.debug(f"Email enviado exitosamente a {to_email}")
             return True
         except Exception as e:
-            self.logger.error(f"Error enviando email a {to_email}: {str(e)}", exc_info=True)
+            self.logger.error(f"{Fore.RED}Error enviando email a {to_email}: {str(e)}", exc_info=True)
             return False

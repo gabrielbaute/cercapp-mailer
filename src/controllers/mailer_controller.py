@@ -5,6 +5,7 @@ class MailerController:
     def __init__(self, mailer: Mailer, csv_processor: CSVProcessor):
         self.mailer = mailer
         self.csv_processor = csv_processor
+        self.controller_name = "MailerController"
 
     def send_emails_from_csv(
             self, 

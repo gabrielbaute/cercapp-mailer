@@ -1,6 +1,7 @@
 from src.database import db
 from src.controllers.user_controller import UsersController
 from src.controllers.mailer_controller import MailerController
+from src.controllers.contacts_controller import ContactsController
 
 class ControllerFactory:
     """Controller Factory"""
@@ -18,5 +19,9 @@ class ControllerFactory:
             return UsersController(self.db, self.current_user)
         if controller_name == "mailer":
             return MailerController()
+        if controller_name == "contacts":
+            return ContactsController(self.db, self.current_user)
+        
         raise ValueError(f"Controlador no soportado: {controller_name}")
+        
         return None

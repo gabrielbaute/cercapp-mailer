@@ -1,0 +1,59 @@
+
+<nav class="navbar is-light" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="{{ url_for('main.index') }}">
+      <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
+    </a>
+
+    <!-- Botón hamburguesa -->
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarMenu" class="navbar-menu">
+    <div class="navbar-start">
+      
+      <!-- Lógica de usuario ya autenticado -->
+      
+        <a class="navbar-item" href="{{ url_for('main.index') }}">Inicio</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">Panel</a>
+          <div class="navbar-dropdown">
+              <a class="navbar-item" href="">Enviar Correos</a>
+              <a class="navbar-item" href="{{ url_for('main.load_file') }}">Cargar CSV</a>
+              <a class="navbar-item" href="">Historial</a>
+              <a class="navbar-item" href="">Contactos</a>
+              <a class="navbar-item" href="">Configurar</a>
+          </div>
+        </div>
+          <a class="navbar-item" href="#">Administración</a>
+      <!-- Usuario no autenticado -->
+      
+      
+      
+    </div>
+    <!-- end navbar -->
+    
+    <!-- Cierre de sesión -->
+    
+    <div class="navbar-end">
+    
+      <div class="navbar-item">
+        <div class="buttons">
+          <b class="date">{{ now.strftime("%d/%m/%Y %H:%M") }}</b>
+        </div>
+      </div>
+    
+      {% if current_user.is_authenticated %}
+      <div class="navbar-item">
+        <span>👋 Hola {{ current_user.username }}</span>
+      </div>
+      <div class="navbar-item">
+        <a class="button is-warning" href="{{ url_for('auth.logout') }}">Cerrar sesión</a>
+      </div>  
+    {% endif %}
+  </div>
+</nav>

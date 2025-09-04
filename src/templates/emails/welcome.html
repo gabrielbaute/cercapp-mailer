@@ -1,0 +1,22 @@
+{% include 'emails/partials/_head.html' %}
+{% include 'emails/partials/_header.html' %}
+
+<p>Estimado/a {{ user_name }}!</p>
+<p>Nos complace darle la bienvenida a CERCAPP, su plataforma de inversión.</p>
+<p>Estamos encantados de tenerlo con nosotros y queremos asegurarnos de que su experiencia sea lo más sencilla y segura posible. A continuación, encontrará su usuario de entrada:</p>
+<p>Usuario: {{ user_mail }}</p>
+<p>¿Qué puede esperar de CERCAPP?</p>
+<ul>
+    <li>Seguridad: Sus datos estarán protegidos con las mejores prácticas de seguridad.</li>
+    <li>Simplicidad: Nuestra interfaz intuitiva le permitirá invertir sin complicaciones.</li>
+    <li>Soporte: Nuestro equipo está siempre disponible para ayudarlo ante cualquier consulta o problema.</li>
+</ul>
+<p>Si no ha solicitado este registro, por favor ignore este mensaje. Recuerde, nunca debe compartir su usuario con terceros para mantener la seguridad de su cuenta.</p>
+<p>Agradecemos su confianza en CERCAPP y esperamos brindarle la mejor experiencia posible.</p>
+<br>
+<p>Saludos cordiales,</p>
+<br>
+<p><b>El equipo de CERCAPP.</b></p>
+<a href="https://web.cercapp.us/preguntas-frecuentes" class="button">Más Información</a>
+
+{% include 'emails/partials/_footer.html' %}

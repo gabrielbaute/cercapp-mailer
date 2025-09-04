@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Cargar CSV{% endblock %}
+
+{% block content %}
+    <div class="columns is-centered">
+        <div class="column is-half">
+        <!-- Contenedor central -->        
+        <div class="card has-text-centered">
+    
+            <div class="card-image">
+                <figure class="image is-128x128 is-inline-block mt-4">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo Cercapp">
+                </figure>
+                <h1 class="title is-6">Cercapp Mailer</h1>
+            </div>
+    
+            <!-- Formulario de carga -->
+            <div class="section">
+                <form method="POST" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    <div class="file has-name is-fullwidth">
+                        <label class="file-label">
+                            {{ form.csv_file(class="file-input") }}
+                            <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                </span>
+                                <span class="file-label">
+                                    Seleccionar archivo CSV
+                                </span>
+                            </span>
+                            <span class="file-name">
+                                {{ form.csv_file.data.filename if form.csv_file.data else "Ningún archivo seleccionado" }}
+                            </span>
+                        </label>
+                    </div>
+                    <br>
+                    <div class="field">
+                        <div class="control">
+                            {{ form.submit(class="button is-link is-fullwidth") }}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

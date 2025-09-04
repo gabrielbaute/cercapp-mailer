@@ -16,8 +16,8 @@ class Mailer:
         self.app = app
         self.mail = Mail(app)
         self.module_name = "CercappMailer"
-        self.logger = logging.getLogger(f"[{self.module_name}]")
-        self.logger.info(f"{Fore.GREEN}{self.module_name} inicializado.")
+        self.logger = logging.getLogger(f"{Fore.LIGHTGREEN_EX}[{self.module_name}]")
+        self.logger.info(f"{self.module_name} inicializado.")
 
     def build_subject(self, user_name: str, subject_text: str) -> str:
         """
@@ -66,7 +66,7 @@ class Mailer:
                     **context
                 )
         except Exception as e:
-            self.logger.error(f"Error cargando plantilla {template_name}: {str(e)}", exc_info=True)
+            self.logger.error(f"{Fore.RED}Error cargando plantilla {template_name}: {str(e)}", exc_info=True)
             return None
 
     def send_email(self, to_email: str, template_name: str, subject: Optional[str] = None, **template_vars: Dict[str, Any]) -> bool:
@@ -91,7 +91,7 @@ class Mailer:
                     self.logger.error(f"{Fore.RED}No se pudo generar el contenido para {to_email}")
                     return False
                     
-                self.logger.info(f"{Fore.LIGHTGREEN_EX}Enviando email a {to_email}")
+                self.logger.info(f"Enviando email a {to_email}")
                 
                 msg = Message(
                     subject=self.build_subject(

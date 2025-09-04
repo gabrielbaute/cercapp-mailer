@@ -16,8 +16,8 @@ class CSVProcessor:
         """
         self.mailer = mailer
         self.module_name = "CSVProcessor"
-        self.logger = logging.getLogger(f"[{self.module_name}]")
-        self.logger.info(f"{Fore.GREEN}{self.module_name} inicializado.")
+        self.logger = logging.getLogger(f"{Fore.LIGHTMAGENTA_EX}[{self.module_name}]")
+        self.logger.info(f"{self.module_name} inicializado.")
     
     def read_recipients(self, csv_file: str) -> List[Dict[str, str]]:
         """
@@ -31,13 +31,13 @@ class CSVProcessor:
         recipients = []
         try:
             with open(csv_file, mode='r', encoding='utf-8') as file:
-                self.logger.info(f"{Fore.LIGHTBLUE_EX}[{self.module_name}]: Abriendo archivo CSV: {csv_file}")
+                self.logger.info(f"{Fore.LIGHTBLUE_EX}Abriendo archivo CSV: {csv_file}")
                 reader = csv.DictReader(file)
                 
                 # Verificar columnas requeridas
                 fieldnames = [f.strip() for f in reader.fieldnames] if reader.fieldnames else []
                 if not all(f in fieldnames for f in ['email', 'name']):
-                    self.logger.error(f"{Fore.RED}[{self.module_name}]: El CSV debe contener columnas 'email' y 'name'")
+                    self.logger.error(f"{Fore.RED}El CSV debe contener columnas 'email' y 'name'")
                     return recipients
                 
                 for row in reader:
@@ -50,23 +50,23 @@ class CSVProcessor:
                     
                     # Validaciones
                     if not email:
-                        self.logger.error(f"{Fore.RED}[{self.module_name}]: Email vacío - Fila: {row}")
+                        self.logger.error(f"{Fore.RED}: Email vacío - Fila: {row}")
                         continue
                         
                     if not self.mailer.is_valid_email(email):
-                        self.logger.error(f"{Fore.RED}[{self.module_name}]: Email no válido '{email}' - Fila: {row}")
+                        self.logger.error(f"{Fore.RED}: Email no válido '{email}' - Fila: {row}")
                         continue
                         
                     if not name:
-                        self.logger.warning(f"{Fore.YELLOW}[{self.module_name}]: Nombre vacío para email {email} - Usando valor por defecto")
+                        self.logger.warning(f"{Fore.YELLOW}: Nombre vacío para email {email} - Usando valor por defecto")
                         name = "Estimado/a"
                     
                     recipients.append({'email': email, 'name': name})
                 
-                self.logger.info(f"{Fore.LIGHTBLUE_EX}[{self.module_name}]: Total de contactos válidos leídos: {len(recipients)}")
+                self.logger.info(f"{Fore.LIGHTBLUE_EX}Total de contactos válidos leídos: {len(recipients)}")
         
         except Exception as e:
-            self.logger.error(f"{Fore.RED}s[{self.module_name}]: Error leyendo el archivo CSV: {str(e)}", exc_info=True)
+            self.logger.error(f"{Fore.RED}Error leyendo el archivo CSV: {str(e)}", exc_info=True)
         
         return recipients
     

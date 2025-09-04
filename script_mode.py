@@ -13,7 +13,7 @@ def main():
     LoggerConfig.setup()
     banner = Banner("Cercapp Mailer")
     
-    logger = get_logger("[CercappCampañas]")
+    logger = get_logger(f"[CercappCampañas]")
 
     logger.info(banner.print_banner())
     logger.info(f"{Fore.LIGHTBLUE_EX}Iniciando proceso de envío de emails en modo SCRIPT...")

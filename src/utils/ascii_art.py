@@ -1,5 +1,8 @@
 from pyfiglet import Figlet
+from colorama import Fore, Style, init
 from src.config import Config
+
+init(autoreset=True)  # Inicializa colorama para soporte de colores en Windows
 
 class Banner:
     def __init__(self, name: str):
@@ -16,7 +19,7 @@ class Banner:
     def get_banner(self) -> str:
         """Devuelve el banner como una cadena de texto."""
         title = self._build_title(self.name)
-        banner = f'''\n{title}\n{self.description} [v{Config.VERSION}]'''
+        banner = f'''{Fore.CYAN}{Style.BRIGHT}\n{title}\n{self.description} [v{Config.VERSION}]'''
         return banner
     
     def print_banner(self) -> None:

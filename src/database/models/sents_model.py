@@ -22,7 +22,7 @@ class Sents(db.Model):
         return {
             'id': self.id,
             'sender': self.sender,
-            'contact': self.contact.to_dict(),
+            'contact': self.contact_id.email,
             'message': self.message,
             'sent_at': self.sent_at.isoformat()
         }

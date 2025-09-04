@@ -3,13 +3,13 @@ from datetime import datetime
 
 class SentCreate(BaseModel):
     sender: EmailStr
-    recipient: EmailStr
+    contact_id: int
     message: str
 
 class SentResponse(BaseModel):
     id: int
     sender: EmailStr
-    recipient: EmailStr
+    contact_id: int
     message: str
     sent_at: datetime
 
